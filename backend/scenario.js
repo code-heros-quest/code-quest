@@ -1,6 +1,5 @@
 'use strict';
 
-const chalk = require('chalk');
 let loot = require('./loot.js');
 const char = require('./characters.js');
 const sDialogue = require('./scenarioDialogue.js');
@@ -168,12 +167,45 @@ const theWitchRiddle = {
 }
 
 const theWitch = new Scenario('The Witch', sDialogue.theWitch, 'riddle', `“I don’t have eyes, But once I did see. I once had thoughts, Now white and empty. What am I?”`, theWitchRiddle);
+
+// theRingAndTheRose
+const theRingAndTheRoseChoice = {
+  choice1: new Choice(1, 'The Warrior and the Assasin', cDialogue.theRingAndTheRoseChoice1, null, 1),
+  choice2: new Choice(2, 'The Wizard and the Warrior', cDialogue.theRingAndTheRoseChoice2, [loot.roseLocket], 1),
+  choice3: new Choice(3, 'The Assasin and the Hunter', cDialogue.theRingAndTheRoseChoice3, [loot.enchantedRing], 1),
+  choice4: new Choice(4, 'The Hunter and the Wizard', cDialogue.theRingAndTheRoseChoice4, [loot.roseLocket, loot.enchantedRing], 1)
+};
+
+const theRingAndTheRose = new Scenario('The Ring and the Rose', sDialogue.theRingAndTheRose, 'You may only select two members of your party to be tested for these items, who will you choose?', theRingAndTheRoseChoice, 1);
+
+// theKingMaker
+const theKingMakerChoices = {
+  choice1: new Choice(1, 'No, why let him know there will soon be a vacancy?', cDialogue.theKingMakerChoices1, null, 1),
+  choice2: new Choice(2, 'Yes, the enemy of my enemy is my friend?', cDialogue.theKingMakerChoices2, null, 1)
+}
+const theKingMaker = new Scenario('The King Maker', sDialogue.theKingMaker, `Do you tell him of your quest to kill the King?`, theKingMakerChoices, 1)
+// backToTheSmithy 
+const backToTheSmithyChoices = {
+  choice1: new Choice(1, `No, you don't want to inflate his sense of self importance`, cDialogue.backToTheSmithyChoices1, [loot.improvedArmor], 1),
+  choice2: new Choice(2, `Yes, you can't resist the opportunity to hear this farfetched tale from the horses mouth`, cDialogue.backToTheSmithyChoices2, [loot.improvedArmor], 1)
+}
+const backToTheSmithy = new Scenario('Back to the Smithy', sDialogue.backToTheSmithy, 'Do you ask him about the broadsword?', backToTheSmithyChoices, 1)
+
+// theShepherdsHouse
+const theShepherdsHouse = new Scenario(`The Shepherd's House`, sDialogue.theShepherdsHouse, null, null, 1);
+
+// theBoisterousBaker
+
+const theBoisterousBaker = new Scenario('The Boisterous Baker', sDialogue.theBoisterousBaker, null, null, 1)
+
+
 // Iron Forge ***********
-// const ironForgeChoices = {
+const ironForgeChoices = {
+  choice1: new Choice(1, 'Look for cloth for bandages', cDialogue.theIronForgeChoices1, [loot.woolBandages], 1),
+  choice2: new Choice(2, 'Look for food to restock rations', cDialogue.theIronForgeChoices2, [loot.travelRations], 1)
+}
 
-// }
-
-// const ironForge = new Scenario('Iron Forge', `You have been walking the southern road for over a day when you come upon a small village. The village seems to have sprouted up around a large smithy and you can hear the sound of a hammer repeatedly striking metal. The air is heavy with the smell of smoke, an acrid metalic smell, and another unidentifiable earthy odor. You pass through the village and try to hail a few of the inhabitants but they all seem to be in a hurry and won't talk to you other than to nod. Making your way towards the large smithy seems like the right choice, hopefully you will be able to repair and replace damaged weapons. As you approach the building you see clouds of black smoke billowing from the chimney and escaping from the open side of the structure. There are 3 rough looking characters hanging around the place looking well armed and well fed. The source of the hammering is revealed to be a massive human man with forearms the size of ${char.warrior.name}'s `, ``, ironForgeChoices);
+const ironForge = new Scenario('Iron Forge', sDialogue.ironForge, `What supplies do you want to ask for?`, ironForgeChoices);
 
 // neutralGround *******
 // const neutralZoneChoices = {
