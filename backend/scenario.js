@@ -1,6 +1,5 @@
 'use strict';
 
-const chalk = require('chalk');
 let loot = require('./loot.js');
 const char = require('./characters.js');
 const sDialogue = require('./scenarioDialogue.js');
@@ -169,23 +168,44 @@ const theWitchRiddle = {
 
 const theWitch = new Scenario('The Witch', sDialogue.theWitch, 'riddle', `“I don’t have eyes, But once I did see. I once had thoughts, Now white and empty. What am I?”`, theWitchRiddle);
 
+// theRingAndTheRose
+const theRingAndTheRoseChoice = {
+  choice1: new Choice(1, 'The Warrior and the Assasin', cDialogue.theRingAndTheRoseChoice1, null, 1),
+  choice2: new Choice(2, 'The Wizard and the Warrior', cDialogue.theRingAndTheRoseChoice2, [loot.roseLocket], 1),
+  choice3: new Choice(3, 'The Assasin and the Hunter', cDialogue.theRingAndTheRoseChoice3, [loot.enchantedRing], 1),
+  choice4: new Choice(4, 'The Hunter and the Wizard', cDialogue.theRingAndTheRoseChoice4, [loot.roseLocket, loot.enchantedRing], 1)
+};
+
+const theRingAndTheRose = new Scenario('The Ring and the Rose', sDialogue.theRingAndTheRose, 'You may only select two members of your party to be tested for these items, who will you choose?', theRingAndTheRoseChoice, 1);
+
+// theKingMaker
+const theKingMakerChoices = {
+  choice1: new Choice(1, 'No, why let him know there will soon be a vacancy?', cDialogue.theKingMakerChoices1, null, 1),
+  choice2: new Choice(2, 'Yes, the enemy of my enemy is my friend?', cDialogue.theKingMakerChoices2, null, 1)
+}
+const theKingMaker = new Scenario('The King Maker', sDialogue.theKingMaker, `Do you tell him of your quest to kill the King?`, theKingMakerChoices, 1)
 // backToTheSmithy 
 const backToTheSmithyChoices = {
-  choice1: new Choice(1, 'Tell the truth', ``),
-  choice2: new Choice(2, 'Some things are better left unsaid', ``)
+  choice1: new Choice(1, `No, you don't want to inflate his sense of self importance`, cDialogue.backToTheSmithyChoices1, [loot.improvedArmor], 1),
+  choice2: new Choice(2, `Yes, you can't resist the opportunity to hear this farfetched tale from the horses mouth`, cDialogue.backToTheSmithyChoices2, [loot.improvedArmor], 1)
 }
-const backToTheSmithy = new Scenario('Back to the Smithy', `After a few hours of tending to your packs and reorganizing your stock you return to the smithy with your newly purchased supplies stowed away to get your armor. `)
+const backToTheSmithy = new Scenario('Back to the Smithy', sDialogue.backToTheSmithy, 'Do you ask him about the broadsword?', backToTheSmithyChoices, 1)
 
 // theShepherdsHouse
-const theShepherdsHouse = new Scenario(`The Shepherd's House`, `You approach the house on the end of the road. It is a small cottage with white walls and a straw roof. You don't see any sheep but you knock anyway. A young girl with braids answers the door and steps back when she sees the four of you standing on the porch. "Mom!" she yells, and flees back into the cottage. A few seconds later a woman, who looks to be her mother comes to the door with a sock and darning needle in her hands. She looks apprehensive but asks "Can I help you?" This time you immediately start by explaining that the blacksmith authorized your supply search. ${char.wizard.name} puts on his most soothing tone, perhaps using a bit of a charm, and tells her "We were just hoping to buy some cloth suitable for bandages". "Well we have no shortage of wool" she says. "I can give you a fair price for some undyed cloth, I can't take the King's coin though, so I hope you have something else." The wizard assures her that you have other currency, but asks "Why doesn't your village take the King's coin?" The woman replies "The blacksmith won't allow anything to be sold or purchased with the King's gold, he likes to pretend we live outside of the kingdom. Won't pay taxes or let any guards in neither." ${char.assassin.name} asks "How does he get away with that? The guards don't demand taxes from you?" She answers "Well, the blacksmith told them we won't pay. He and his gang of louts ran 'em off, and I guess we are too small a village to put much effort into." ${char.wizard.name} speaks up, again with his soothing tone, to inquire about the sheep "Where does your family keep the sheep? We didn't see them as we came up, and I can't imagine it is safe for them to range far." She tells you that the blacksmith and his gang keep the land safe for three miles surrounding the village on all sides. Her husband and son can take the sheep out without worrying about monsters picking them off. ${char.assassin.name} has one last question "Why does the blacksmith hate the King so much? Not that there isn't a valid reason, but this seems personal." The Shepherdess tells you "Well there is a story around here, and none of us dares argue it... The Smith family has a sword, it is mounted above the forge in the smithy. It is a mighty broadsword made of the strongest steel. It is said that only the true King of the land can wield it. Every new moon the blacksmith comes into the village square with the sword and makes us all bend a knee to acknowledge his rightful claim to the throne. Now I am not saying he should be the king, but he does alright here... He keeps the monsters away and we all get enough to eat, which is more than I can say for most places." The woman looks shocked, like she just realized she said too much, and rushes to get your cloth so you can leave.`, null, null, 1);
+const theShepherdsHouse = new Scenario(`The Shepherd's House`, sDialogue.theShepherdsHouse, null, null, 1);
+
+// theBoisterousBaker
+
+const theBoisterousBaker = new Scenario('The Boisterous Baker', sDialogue.theBoisterousBaker, null, null, 1)
+
 
 // Iron Forge ***********
 const ironForgeChoices = {
-  choice1: new Choice(1, 'Look for cloth for bandages', `You see a woman rushing by with a basket full of clothes. ${char.hunter.name} jogs up beside her and asks "Excuse me miss, do you know where we might purchase some cloth for bandages here?" She looks unwilling to speak to ${char.hunter.name} but when the hunter adds "the Blacksmith said we could purchase supplies" she seems slightly more open "Yes, try the house on the end of the road there, they keep sheep and make some wool cloth." You thank her and she continues walking away at her rapid pace.`, null, 1),
-  choice2: new Choice(2, 'Look for food to restock rations', ``)
+  choice1: new Choice(1, 'Look for cloth for bandages', cDialogue.theIronForgeChoices1, [loot.woolBandages], 1),
+  choice2: new Choice(2, 'Look for food to restock rations', cDialogue.theIronForgeChoices2, [loot.travelRations], 1)
 }
 
-const ironForge = new Scenario('Iron Forge', `You have been walking the southern road for over a day when you come upon a small village. The village seems to have sprouted up around a large smithy and you can hear the sound of a hammer repeatedly striking metal. The air is heavy with the smell of smoke, an acrid metalic smell, and another unidentifiable earthy odor. You pass through the village and try to hail a few of the inhabitants but they all seem to be in a hurry and won't talk to you other than to nod. Making your way towards the large smithy seems like the right choice, hopefully you will be able to repair and replace damaged weapons. As you approach the building you see clouds of black smoke billowing from the chimney and escaping from the open side of the structure. There are 3 rough looking characters hanging around the place looking well armed and well fed. The source of the hammering is revealed to be a massive human man with forearms the size of ${char.warrior.name}'s neck. The massive human is wearing a leather apron and a white shirt stained with soot and sweat. As you walk into the smithy he looks up with a scowl and then immediately goes back to his work, ignoring you. One of the idle men steps forward to intercept your group and says "Well we don't see too many strangers in these parts... and we like it that way". You hoped for a warmer reception. ${char.wizard.name}, ever the peace-maker replies "We come in search of repairs for our armor and possibly some food supplies if your village has any to spare." The speaker answers "If you have gold we can repair your armor, but the King's coin is no good here." This time ${char.warrior.name} speaks up, "We only have outland coins, but they are gold." "Aye, that'll do", the man replies. Finally the glowering blacksmith acknowledges you, "You may wait in the village for me to repair your armor, but don't distract my villagers... they have work to do." You get the sense that this man is in charge here. Your group tells him you will purchase some food but not bother anyone unnecessarily. You leave your armor and head away from the smithy. ${char.hunter.name} says, "Does anyone else think that was wierd?" ${char.assassin.name} answers "You mean the way we had to make it through the bully-boys to talk to the 'boss'?" The hunter responds "That and the way he referred the the people here as HIS villagers". As you go in search of food you decide to check in with the villagers a little.`, `What supplies do you want to ask for?`, ironForgeChoices);
+const ironForge = new Scenario('Iron Forge', sDialogue.ironForge, `What supplies do you want to ask for?`, ironForgeChoices);
 
 // neutralGround *******
 // const neutralZoneChoices = {
